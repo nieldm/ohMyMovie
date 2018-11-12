@@ -37,4 +37,13 @@ class PostViewModel {
         callback(ids)
     }
     
+    func getReadedPosts(callback: @escaping ([Int]) -> ()) {
+        let request = NSFetchRequest<PostItem>(entityName: "PostItem")
+        request.predicate = NSPredicate(format: "read == YES")
+        
+        let items = try? context.fetch(request)
+        let ids = items?.map { Int($0.postId) } ?? []
+        callback(ids)
+    }
+    
 }

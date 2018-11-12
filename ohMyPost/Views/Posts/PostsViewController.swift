@@ -8,7 +8,7 @@ import RxCocoa
 import CoreData
 
 enum PostSegmentValue: Int {
-    case all = 0, favorite
+    case all = 0, favorite, unread
 }
 
 class PostsViewController: UIViewController {
@@ -69,6 +69,7 @@ class PostsViewController: UIViewController {
             }
             $0.insertSegment(withTitle: "All", at: PostSegmentValue.all.rawValue, animated: false)
             $0.insertSegment(withTitle: "Favorite", at: PostSegmentValue.favorite.rawValue, animated: false)
+            $0.insertSegment(withTitle: "Unread", at: PostSegmentValue.unread.rawValue, animated: false)
             $0.selectedSegmentIndex = 0
             $0.tintColor = .turquoiseBlue
             $0.rx.controlEvent(UIControlEvents.valueChanged)
