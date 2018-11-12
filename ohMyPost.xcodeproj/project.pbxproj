@@ -51,6 +51,11 @@
 		B194F937218F75410057C0C3 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194F935218F75410057C0C3 /* PostsViewController.swift */; };
 		B1EA1E7F218F9E0F00C953A0 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA1E7E218F9E0F00C953A0 /* PostViewModel.swift */; };
 		B1EA1E81218F9F0A00C953A0 /* PostViewModel+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA1E80218F9F0A00C953A0 /* PostViewModel+Rx.swift */; };
+		B1FA09B12198855A00D9E508 /* GoogleDocsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA09B02198855A00D9E508 /* GoogleDocsAPI.swift */; };
+		B1FA09B32198865300D9E508 /* testApplicationData.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1FA09B22198865300D9E508 /* testApplicationData.csv */; };
+		B1FA09B7219886E000D9E508 /* OMPGoogleDocsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA09B6219886E000D9E508 /* OMPGoogleDocsRepository.swift */; };
+		B1FA09B92198878100D9E508 /* OMPGoogleDocsRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA09B82198878100D9E508 /* OMPGoogleDocsRepositoryTest.swift */; };
+		B1FA09BC21991F9A00D9E508 /* OMPGoogleDocsRepository+PostDetailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA09BB21991F9A00D9E508 /* OMPGoogleDocsRepository+PostDetailAPI.swift */; };
 		BF0BD0CC36FD556C57D5E887 /* Pods_ohMyPost_ohMyPostBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E294C3020D0F98AD85395ACA /* Pods_ohMyPost_ohMyPostBase.framework */; };
 		E6CCF9A36FDB8D6ED3D84544 /* Pods_ohMyPost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D36A99039FE8A8451F6F15 /* Pods_ohMyPost.framework */; };
 /* End PBXBuildFile section */
@@ -154,6 +159,11 @@
 		B194F935218F75410057C0C3 /* PostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
 		B1EA1E7E218F9E0F00C953A0 /* PostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		B1EA1E80218F9F0A00C953A0 /* PostViewModel+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostViewModel+Rx.swift"; sourceTree = "<group>"; };
+		B1FA09B02198855A00D9E508 /* GoogleDocsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDocsAPI.swift; sourceTree = "<group>"; };
+		B1FA09B22198865300D9E508 /* testApplicationData.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testApplicationData.csv; sourceTree = "<group>"; };
+		B1FA09B6219886E000D9E508 /* OMPGoogleDocsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMPGoogleDocsRepository.swift; sourceTree = "<group>"; };
+		B1FA09B82198878100D9E508 /* OMPGoogleDocsRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMPGoogleDocsRepositoryTest.swift; sourceTree = "<group>"; };
+		B1FA09BB21991F9A00D9E508 /* OMPGoogleDocsRepository+PostDetailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OMPGoogleDocsRepository+PostDetailAPI.swift"; sourceTree = "<group>"; };
 		DE27F42C9E70158C0D7CC46B /* Pods-ohMyPostTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ohMyPostTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ohMyPostTests/Pods-ohMyPostTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E294C3020D0F98AD85395ACA /* Pods_ohMyPost_ohMyPostBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ohMyPost_ohMyPostBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E725D0C9EBBDF838F48BB2F5 /* Pods-ohMyPost-ohMyPostBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ohMyPost-ohMyPostBase.release.xcconfig"; path = "Pods/Target Support Files/Pods-ohMyPost-ohMyPostBase/Pods-ohMyPost-ohMyPostBase.release.xcconfig"; sourceTree = "<group>"; };
@@ -228,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				B118F021218F60E400E7DBB8 /* JSONPlaceholderAPI.swift */,
+				B1FA09B02198855A00D9E508 /* GoogleDocsAPI.swift */,
 				B169B94C219293B600D8FC91 /* Mocks */,
 			);
 			path = API;
@@ -278,9 +289,8 @@
 		B118F05B218F68A500E7DBB8 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				B118F05C218F68A500E7DBB8 /* OMPRepository.swift */,
-				B169B91D219229C200D8FC91 /* OMPRepository+PostDetailAPI.swift */,
-				B118F05E218F6AE300E7DBB8 /* OMPRepositoryTest.swift */,
+				B1FA09B5219886A100D9E508 /* JSONRepository */,
+				B1FA09BA2198881100D9E508 /* GoogleDocsRepository */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -379,6 +389,7 @@
 			isa = PBXGroup;
 			children = (
 				B169B94D219293B600D8FC91 /* postsResponse.json */,
+				B1FA09B22198865300D9E508 /* testApplicationData.csv */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -419,6 +430,26 @@
 				B1EA1E80218F9F0A00C953A0 /* PostViewModel+Rx.swift */,
 			);
 			path = Posts;
+			sourceTree = "<group>";
+		};
+		B1FA09B5219886A100D9E508 /* JSONRepository */ = {
+			isa = PBXGroup;
+			children = (
+				B118F05C218F68A500E7DBB8 /* OMPRepository.swift */,
+				B169B91D219229C200D8FC91 /* OMPRepository+PostDetailAPI.swift */,
+				B118F05E218F6AE300E7DBB8 /* OMPRepositoryTest.swift */,
+			);
+			path = JSONRepository;
+			sourceTree = "<group>";
+		};
+		B1FA09BA2198881100D9E508 /* GoogleDocsRepository */ = {
+			isa = PBXGroup;
+			children = (
+				B1FA09B6219886E000D9E508 /* OMPGoogleDocsRepository.swift */,
+				B1FA09B82198878100D9E508 /* OMPGoogleDocsRepositoryTest.swift */,
+				B1FA09BB21991F9A00D9E508 /* OMPGoogleDocsRepository+PostDetailAPI.swift */,
+			);
+			path = GoogleDocsRepository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -588,6 +619,7 @@
 				B12AAB15218F59F50061FE84 /* LaunchScreen.storyboard in Resources */,
 				B169B94E219293B600D8FC91 /* postsResponse.json in Resources */,
 				B12AAB12218F59F50061FE84 /* Assets.xcassets in Resources */,
+				B1FA09B32198865300D9E508 /* testApplicationData.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,6 +668,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
 				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CSV.swift/CSV.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -653,6 +686,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CSV.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -721,6 +755,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ohMyPost/Pods-ohMyPost-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CSV.swift/CSV.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -736,6 +771,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CSV.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -828,6 +864,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1FA09B12198855A00D9E508 /* GoogleDocsAPI.swift in Sources */,
 				B169B92B219232B700D8FC91 /* PostDetailViewModel.swift in Sources */,
 				B118F022218F60E400E7DBB8 /* JSONPlaceholderAPI.swift in Sources */,
 				B169B9312192342800D8FC91 /* PostDetailUserTableViewCell.swift in Sources */,
@@ -844,6 +881,7 @@
 				B169B94B2192513900D8FC91 /* Managed.swift in Sources */,
 				B169B9392192468500D8FC91 /* PostDetailCommentDetailTableViewCell.swift in Sources */,
 				B169B926219230C600D8FC91 /* PostDetailView.swift in Sources */,
+				B1FA09B7219886E000D9E508 /* OMPGoogleDocsRepository.swift in Sources */,
 				B169B92F2192341B00D8FC91 /* PostDetailDescriptionTableViewCell.swift in Sources */,
 				B169B9122192233600D8FC91 /* PostDetailViewController.swift in Sources */,
 				B194F937218F75410057C0C3 /* PostsViewController.swift in Sources */,
@@ -852,6 +890,7 @@
 				B169B92221922D6100D8FC91 /* SectionOfPosts.swift in Sources */,
 				B1EA1E7F218F9E0F00C953A0 /* PostViewModel.swift in Sources */,
 				B194F936218F75410057C0C3 /* PostTableViewCell.swift in Sources */,
+				B1FA09BC21991F9A00D9E508 /* OMPGoogleDocsRepository+PostDetailAPI.swift in Sources */,
 				B1EA1E81218F9F0A00C953A0 /* PostViewModel+Rx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -862,6 +901,7 @@
 			files = (
 				B169B91C219226DB00D8FC91 /* PostDetailModelTest.swift in Sources */,
 				B118F05F218F6AE300E7DBB8 /* OMPRepositoryTest.swift in Sources */,
+				B1FA09B92198878100D9E508 /* OMPGoogleDocsRepositoryTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

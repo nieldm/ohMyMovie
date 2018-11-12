@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'ohMyPost' do
   use_frameworks!
@@ -9,6 +9,7 @@ target 'ohMyPost' do
   pod 'RxCocoa',           '~> 4.0'
   pod 'SnapKit',           '~> 4.2'
   pod 'RxDataSources',     '~> 3.0'
+  pod 'CSV.swift', '~> 2.2.1'
 
   target 'ohMyPostBase' do
   end

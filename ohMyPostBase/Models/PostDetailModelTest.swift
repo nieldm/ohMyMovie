@@ -8,7 +8,7 @@ class PostDetailModelTest: XCTestCase {
     override func setUp() {
         self.sut = PostDetailModel(
             api: MockedAPI(),
-            post: Post(id: 0, userId: 0, title: "Test", body: "TestCase")
+            post: Post(id: 0, userId: 0, title: "Test", body: "TestCase", image: nil)
         )
     }
 

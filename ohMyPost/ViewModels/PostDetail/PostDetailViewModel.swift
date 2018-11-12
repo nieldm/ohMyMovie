@@ -24,6 +24,9 @@ class PostDetailViewModel {
     
     func load() {
         self.rx.getUser()
+            .catchError({ (_) -> Observable<User> in
+                return Observable<User>.never()
+            })
             .map { SectionOfPostDetail(header: "User", items: [PostDetailSection.user($0)]) }
             .map { section in
                 var sections = self.data.value
@@ -35,6 +38,9 @@ class PostDetailViewModel {
             .disposed(by: self.disposeBag)
         
         self.rx.getComments()
+            .catchError({ (_) -> Observable<[Comment]> in
+                return Observable<[Comment]>.never()
+            })
             .map { comments -> [SectionOfPostDetail] in
                 var commentSections = comments.map({ (comment) -> SectionOfPostDetail in
                     return SectionOfPostDetail(header: "Comment\(comment.id)", items: [PostDetailSection.comment(comment)])

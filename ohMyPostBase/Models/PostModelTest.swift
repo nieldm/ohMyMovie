@@ -35,7 +35,7 @@ class MockedAPI {}
 
 extension MockedAPI: PostAPI {
     func getPosts(callback: @escaping ([Post]) -> ()) {
-        let post = Post(id: 0, userId: 0, title: "Hello World!", body: "I'm Batman")
+        let post = Post(id: 0, userId: 0, title: "Hello World!", body: "I'm Batman", image: nil)
         callback([post])
     }
 }

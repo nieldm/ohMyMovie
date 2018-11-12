@@ -53,7 +53,7 @@ class PostTableViewCell: UITableViewCell {
                 make.left.equalTo(self.iconImageView.snp.right).offset(16)
                 make.right.equalTo(self.favoriteImageView.snp.left).offset(-8)
             }
-            $0.numberOfLines = 2
+            $0.numberOfLines = 1
             $0.text = "Title"
             $0.font = UIFont.OMPTitle
             $0.textColor = UIColor.dusk

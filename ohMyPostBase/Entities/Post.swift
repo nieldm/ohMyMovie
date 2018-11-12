@@ -5,8 +5,17 @@ public struct Post: Codable {
     public let userId: Int
     public let title: String
     public let body: String
+    public let image: String?
     public let favorited = false
     public let read = false
+    
+    public init(id: Int, userId: Int, title: String, body: String, image: String? = nil) {
+        self.id = id
+        self.userId = userId
+        self.title = title
+        self.body = body
+        self.image = image
+    }
 }
 
 extension Post: Equatable {

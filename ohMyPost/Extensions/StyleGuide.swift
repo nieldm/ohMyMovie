@@ -48,6 +48,10 @@ extension UIFont {
         return UIFont.systemFont(ofSize: 12.0, weight: .regular)
     }
     
+    class var OMPDescription: UIFont {
+        return UIFont.systemFont(ofSize: 22.0, weight: .regular)
+    }
+    
 }
 
 // Border and Shadow

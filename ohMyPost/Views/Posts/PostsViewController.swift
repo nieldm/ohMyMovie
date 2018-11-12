@@ -28,7 +28,8 @@ class PostsViewController: UIViewController {
     
     init(managedObjectContext: NSManagedObjectContext) {
         let model = PostModel(api:
-            OMPRepository(mocked: false)
+//            OMPRepository(mocked: false)
+            OMPGoogleDocsRepository(mocked: true)
         )
         self.viewModel = PostViewModel(
             model: model,
@@ -166,7 +167,7 @@ class PostsViewController: UIViewController {
                 }
                 self.viewModel.markAsRead(post: post)
                 let model = PostDetailModel(
-                    api: OMPRepository(mocked: false),
+                    api: OMPGoogleDocsRepository(mocked: false),
                     post: post)
                 let viewModel = PostDetailViewModel(model: model, context: self.viewModel.context)
                 let viewController = PostDetailViewController(viewModel: viewModel)

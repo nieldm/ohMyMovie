@@ -13,7 +13,6 @@ extension Reactive where Base == PostDetailViewModel {
                     observer.onNext(user)
                     observer.onCompleted()
                 } else {
-                    observer.onError(RxError.noElements)
                 }
             }
             return Disposables.create()
@@ -23,8 +22,12 @@ extension Reactive where Base == PostDetailViewModel {
     func getComments() -> Observable<[Comment]> {
         return Observable.create { observer in
             self.base.model.getComment { comments in
-                observer.onNext(comments)
-                observer.onCompleted()
+                if comments.count > 0 {
+                    observer.onNext(comments)
+                    observer.onCompleted()
+                } else {
+                    observer.onError(RxError.noElements)
+                }
             }
             return Disposables.create()
         }
