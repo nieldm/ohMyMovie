@@ -49,7 +49,11 @@ extension UIFont {
     }
     
     class var OMPDescription: UIFont {
-        return UIFont.systemFont(ofSize: 22.0, weight: .regular)
+        return UIFont.systemFont(ofSize: 22.0, weight: .light)
+    }
+    
+    class var OMPMegaHeader: UIFont {
+        return UIFont.systemFont(ofSize: 25.0, weight: .bold)
     }
     
 }
@@ -60,7 +64,7 @@ extension CALayer {
     
     func addBorderAndShadow() {
         self.do {
-            $0.cornerRadius = 4
+            $0.addBorder()
             $0.shadowColor = UIColor.dusk.cgColor
             $0.shadowOffset = CGSize(width: 0, height: 3.0)
             $0.shadowRadius = 2.0
@@ -69,4 +73,30 @@ extension CALayer {
         }
     }
     
+    func addBorder() {
+        self.do {
+            $0.cornerRadius = 4
+            $0.masksToBounds = false
+        }
+    }
+    
+}
+
+extension UIImage {
+    static func from(color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context!.setFillColor(color.cgColor)
+        context!.fill(rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img!
+    }
+}
+
+enum ViewOffset: CGFloat {
+    case big = 24
+    case mid = 16
+    case small = 8
 }

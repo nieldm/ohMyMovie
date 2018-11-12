@@ -1,5 +1,6 @@
 import UIKit
 import ohMyPostBase
+import AlamofireImage
 
 class PostDetailDescriptionTableViewCell: UITableViewCell {
     static let identifier = "PostDetailDescriptionTableViewCell"
@@ -19,7 +20,7 @@ class PostDetailDescriptionTableViewCell: UITableViewCell {
             }
             $0.numberOfLines = 0
             $0.text = "Title"
-            $0.font = .OMPHeader
+            $0.font = .OMPMegaHeader
             $0.textColor = .dusk
         }
         
@@ -31,8 +32,9 @@ class PostDetailDescriptionTableViewCell: UITableViewCell {
                 make.right.equalToSuperview().inset(16)
                 make.height.equalTo(120)
             }
-            $0.backgroundColor = UIColor.turquoiseBlue
+            $0.contentMode = .scaleAspectFill
             $0.layer.addBorderAndShadow()
+            $0.clipsToBounds = true
         }
         
         self.bodyLabel.do {
@@ -52,6 +54,29 @@ class PostDetailDescriptionTableViewCell: UITableViewCell {
     func set(data: Post) {
         self.titleLabel.text = data.title.capitalized
         self.bodyLabel.text = data.body
+        if let imageUrl = data.image,
+            let url = URL(string: imageUrl) {
+            self.imageContainer.af_setImage(
+                withURL: url,
+                placeholderImage: UIImage.from(color: .turquoiseBlue),
+                filter: nil,
+                progress: nil,
+                progressQueue: DispatchQueue.global(qos: .userInitiated),
+                imageTransition: UIImageView.ImageTransition.crossDissolve(0.3),
+                runImageTransitionIfCached: true) { (response) in
+                    switch response.result {
+                    case .failure(let error):
+                        self.imageContainer.image = UIImage.from(color: UIColor.dusk36)
+                        print("🖼 \(error.localizedDescription)")
+                    default: ()
+                    }
+            }
+        } else {
+            self.imageContainer.snp.remakeConstraints { make in
+                make.top.equalTo(self.titleLabel.snp.bottom).offset(8)
+                make.height.equalTo(0)
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

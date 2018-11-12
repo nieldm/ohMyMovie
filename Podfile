@@ -9,7 +9,8 @@ target 'ohMyPost' do
   pod 'RxCocoa',           '~> 4.0'
   pod 'SnapKit',           '~> 4.2'
   pod 'RxDataSources',     '~> 3.0'
-  pod 'CSV.swift', '~> 2.2.1'
+  pod 'CSV.swift',         '~> 2.2.1'
+  pod 'AlamofireImage',    '~> 3.4'
 
   target 'ohMyPostBase' do
   end
