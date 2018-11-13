@@ -12,13 +12,13 @@ class PostDetailModelTest: XCTestCase {
         )
     }
 
-    func testUser() {
+    func test_user() {
         self.sut.getUser { user in
             XCTAssertEqual(user?.name, "Daniel Mendez")
         }
     }
     
-    func testComment() {
+    func test_comment() {
         self.sut.getComment { comments in
             XCTAssertEqual(comments.first?.email, "nieldm@gmail.com")
         }

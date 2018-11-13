@@ -29,9 +29,13 @@ class PostDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.accessibilityIdentifier = "postDetailView"
+        
         self.viewModel.getFavoritedState { [weak self] favorited in
             self?.changeFavoriteBarButton(favorited: favorited)
         }
+        
         self.favoriteBarButton.do {
             self.navigationItem.rightBarButtonItem = $0
             $0.rx.tap

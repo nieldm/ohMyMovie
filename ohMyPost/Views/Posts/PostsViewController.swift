@@ -41,10 +41,10 @@ class PostsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "Posts"
         self.view.do {
             $0.backgroundColor = .lightGrayBG
+            $0.accessibilityIdentifier = "postView"
         }
         
         UIBarButtonItem(barButtonSystemItem: .refresh, target: nil, action: nil).do {
@@ -108,6 +108,7 @@ class PostsViewController: UIViewController {
             $0.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
             $0.showsVerticalScrollIndicator = false
             $0.separatorColor = .lightGrayBG
+            $0.accessibilityIdentifier = "postsTableView"
         }
         
         self.noResults.do {
@@ -128,6 +129,7 @@ class PostsViewController: UIViewController {
                 .disposed(by: self.disposeBag)
         }
         
+
         self.viewModel.rx.getPosts()
             .subscribe(onNext: { [weak self] posts in
                 self?.data.accept(posts)

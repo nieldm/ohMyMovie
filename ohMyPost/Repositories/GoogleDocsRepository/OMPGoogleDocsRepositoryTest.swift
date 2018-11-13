@@ -21,7 +21,8 @@ class OMPGoogleDocsRepositoryTest: XCTestCase {
         let expectation = XCTestExpectation(description: "Load Posts")
         self.sut.getPosts { (posts) in
             guard let post = posts.first else {
-                fatalError("No Posts")
+                XCTFail("No Posts")
+                return
             }
             XCTAssertEqual(post.title, "title")
             XCTAssertEqual(post.body, "description")

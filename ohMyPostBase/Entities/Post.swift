@@ -6,7 +6,7 @@ public struct Post: Codable, Then {
     public let userId: Int
     public let title: String
     public let body: String
-    public let image: String?
+    public var image: String? = nil
     public var favorited = false
     public var read = false
     
