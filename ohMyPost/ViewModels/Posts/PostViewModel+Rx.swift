@@ -1,14 +1,42 @@
 import Foundation
 import RxSwift
 import ohMyPostBase
+import CoreData
 
 extension PostViewModel: ReactiveCompatible {}
 
 extension Reactive where Base == PostViewModel {
     
-    func getPosts() -> Observable<[Post]> {
+    func getPostsFromPersistence() -> Observable<[Post]> {
+        let request = NSFetchRequest<PostItem>(entityName: "PostItem")
+        let items = try? self.base.context.fetch(request).map { $0.toPost() }
+        return Observable<[Post]>.of(items ?? [])
+    }
+    
+    private func resetAll() -> Single<Void> {
+        return Single<Void>.create { observer in
+            let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "PostItem")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+            do
+            {
+                try self.base.context.execute(deleteRequest)
+                try self.base.context.save()
+                observer(.success(()))
+            }
+            catch let error
+            {
+                observer(.error(error))
+                print ("There was an error \(error.localizedDescription)")
+            }
+            return Disposables.create()
+        }
+
+    }
+    
+    private func loadPosts() -> Observable<[Post]> {
         return Observable.create { observer in
             self.base.model.loadPosts(callback: { (posts) in
+                posts.forEach { let _ = PostItem.insertOrUpdate(into: self.base.context, post: $0) }
                 observer.onNext(posts)
                 observer.onCompleted()
             })
@@ -16,14 +44,23 @@ extension Reactive where Base == PostViewModel {
         }
     }
     
+    func forceReload() -> Observable<[Post]> {
+        return self.resetAll()
+            .asObservable()
+            .flatMap { _ -> Observable<[Post]> in
+                return self.loadPosts()
+            }
+    }
+    
+    func getPosts() -> Observable<[Post]> {
+        return self.loadPosts().flatMap { _ in self.getPostsFromPersistence() }
+    }
+    
     func getFiltered() -> Observable<[Post]> {
         return Observable.create { observer in
-            self.base.getFavoritePosts { ids in
-                self.base.model.loadPosts(callback: { (posts) in
-                    let favoritedPost = posts.filter { ids.contains($0.id) }
-                    observer.onNext(favoritedPost)
-                    observer.onCompleted()
-                })
+            self.base.getFavoritePosts { posts in
+                observer.onNext(posts)
+                observer.onCompleted()
             }
             return Disposables.create()
         }
@@ -31,12 +68,9 @@ extension Reactive where Base == PostViewModel {
     
     func getUnread() -> Observable<[Post]> {
         return Observable.create { observer in
-            self.base.getReadedPosts { ids in
-                self.base.model.loadPosts(callback: { (posts) in
-                    let favoritedPost = posts.filter { !ids.contains($0.id) }
-                    observer.onNext(favoritedPost)
-                    observer.onCompleted()
-                })
+            self.base.getReadedPosts { posts in
+                observer.onNext(posts)
+                observer.onCompleted()
             }
             return Disposables.create()
         }
@@ -44,7 +78,7 @@ extension Reactive where Base == PostViewModel {
     
     func getBySegment(segment: PostSegmentValue) -> Observable<[Post]> {
         switch segment {
-        case .all: return self.getPosts()
+        case .all: return self.getPostsFromPersistence()
         case .favorite: return self.getFiltered()
         case .unread: return self.getUnread()
         }

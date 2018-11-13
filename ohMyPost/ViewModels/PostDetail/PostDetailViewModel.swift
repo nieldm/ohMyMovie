@@ -71,7 +71,12 @@ class PostDetailViewModel {
             return
         }
         self.context.performChanges {
-            let _ = PostItem.insert(into: self.context, post: self.model.post, favorite: true)
+            let _ = PostItem.insert(
+                into: self.context,
+                post: self.model.post.with {
+                    $0.favorited = true
+                }
+            )
         }
         callback(true)
     }

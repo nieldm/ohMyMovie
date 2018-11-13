@@ -12,38 +12,39 @@ class PostViewModel {
         self.context = managedObjectContext
     }
     
-    func markAsRead(post: Post) {
-        let request = NSFetchRequest<PostItem>(entityName: "PostItem")
-        request.predicate = NSPredicate(format: "postId == %i", post.id)
-
-        let items = try? context.fetch(request)
-        if let item = items?.first {
-            self.context.performChanges {
-                item.setAsRead()
-            }
-            return
-        }
-        self.context.performChanges {
-            let _ = PostItem.insert(into: self.context, post: post)
-        }
+    func getDetailView(for post: Post) -> PostDetailViewController {
+        self.markAsRead(post: post)
+        let model = PostDetailModel(
+            api: Current.postDetailApi(),
+            post: post)
+        let viewModel = PostDetailViewModel(model: model, context: self.context)
+        let viewController = PostDetailViewController(viewModel: viewModel)
+        return viewController
     }
     
-    func getFavoritePosts(callback: @escaping ([Int]) -> ()) {
+    func markAsRead(post: Post) {
+        PostItem.insertOrUpdate(
+            into: self.context,
+            post: post.with {
+                $0.read = true
+            }
+        )
+    }
+    
+    func getFavoritePosts(callback: @escaping ([Post]) -> ()) {
         let request = NSFetchRequest<PostItem>(entityName: "PostItem")
         request.predicate = NSPredicate(format: "favorite == YES")
         
-        let items = try? context.fetch(request)
-        let ids = items?.map { Int($0.postId) } ?? []
-        callback(ids)
+        let items = try? context.fetch(request).map { $0.toPost() }
+        callback(items ?? [])
     }
     
-    func getReadedPosts(callback: @escaping ([Int]) -> ()) {
+    func getReadedPosts(callback: @escaping ([Post]) -> ()) {
         let request = NSFetchRequest<PostItem>(entityName: "PostItem")
-        request.predicate = NSPredicate(format: "read == YES")
+        request.predicate = NSPredicate(format: "read == NO")
         
-        let items = try? context.fetch(request)
-        let ids = items?.map { Int($0.postId) } ?? []
-        callback(ids)
+        let items = try? context.fetch(request).map { $0.toPost() }
+        callback(items ?? [])
     }
     
 }

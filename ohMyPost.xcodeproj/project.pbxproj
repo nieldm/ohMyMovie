@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		06BC0F5B5CCCA68270DB46D0 /* Pods_ohMyPostTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0EC45B3D275805C5AF0C3F1 /* Pods_ohMyPostTests.framework */; };
 		85C724B80DFADBA29168CC5B /* Pods_ohMyPostTests_ohMyPostBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172F63FA787236AF9E0DEAC2 /* Pods_ohMyPostTests_ohMyPostBaseTests.framework */; };
+		B114B513219A518E00C0440D /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = B114B512219A518E00C0440D /* World.swift */; };
 		B118F022218F60E400E7DBB8 /* JSONPlaceholderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B118F021218F60E400E7DBB8 /* JSONPlaceholderAPI.swift */; };
 		B118F031218F646700E7DBB8 /* ohMyPostBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B118F028218F646700E7DBB8 /* ohMyPostBase.framework */; };
 		B118F03A218F646700E7DBB8 /* ohMyPostBase.h in Headers */ = {isa = PBXBuildFile; fileRef = B118F02A218F646700E7DBB8 /* ohMyPostBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -114,6 +115,7 @@
 		7CF485BA521D0F9B28AE2B73 /* Pods-ohMyPost.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ohMyPost.release.xcconfig"; path = "Pods/Target Support Files/Pods-ohMyPost/Pods-ohMyPost.release.xcconfig"; sourceTree = "<group>"; };
 		7D0C9114A567E1151E8F9E0E /* Pods-ohMyPostTests-ohMyPostBaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ohMyPostTests-ohMyPostBaseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ohMyPostTests-ohMyPostBaseTests/Pods-ohMyPostTests-ohMyPostBaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		A0D36A99039FE8A8451F6F15 /* Pods_ohMyPost.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ohMyPost.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B114B512219A518E00C0440D /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = World.swift; path = ../../../Movies/World.swift; sourceTree = "<group>"; };
 		B118F021218F60E400E7DBB8 /* JSONPlaceholderAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONPlaceholderAPI.swift; sourceTree = "<group>"; };
 		B118F028218F646700E7DBB8 /* ohMyPostBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ohMyPostBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B118F02A218F646700E7DBB8 /* ohMyPostBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ohMyPostBase.h; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				B118F05B218F68A500E7DBB8 /* Repositories */,
 				B1270E09218F6F5100322750 /* Views */,
 				B1EA1E7C218F9E0F00C953A0 /* ViewModels */,
+				B114B512219A518E00C0440D /* World.swift */,
 			);
 			path = ohMyPost;
 			sourceTree = "<group>";
@@ -871,6 +874,7 @@
 				B1FA09B12198855A00D9E508 /* GoogleDocsAPI.swift in Sources */,
 				B169B92B219232B700D8FC91 /* PostDetailViewModel.swift in Sources */,
 				B118F022218F60E400E7DBB8 /* JSONPlaceholderAPI.swift in Sources */,
+				B114B513219A518E00C0440D /* World.swift in Sources */,
 				B169B9312192342800D8FC91 /* PostDetailUserTableViewCell.swift in Sources */,
 				B118F05D218F68A500E7DBB8 /* OMPRepository.swift in Sources */,
 				B169B949219250E600D8FC91 /* NSManagedObjectContext+Extensions.swift in Sources */,

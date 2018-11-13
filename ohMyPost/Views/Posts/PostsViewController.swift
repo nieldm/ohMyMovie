@@ -27,10 +27,7 @@ class PostsViewController: UIViewController {
     }
     
     init(managedObjectContext: NSManagedObjectContext) {
-        let model = PostModel(api:
-//            OMPRepository(mocked: false)
-            OMPGoogleDocsRepository(mocked: true)
-        )
+        let model = PostModel(api: Current.postApi())
         self.viewModel = PostViewModel(
             model: model,
             managedObjectContext: managedObjectContext
@@ -54,9 +51,12 @@ class PostsViewController: UIViewController {
             $0.tintColor = .turquoiseBlue
             self.navigationItem.rightBarButtonItem = $0
             $0.rx.tap
-                .asDriver()
-                .drive(onNext: { [weak self] in
-                    self?.reloadPosts()
+                .debounce(0.5, scheduler: MainScheduler.instance)
+                .flatMap { self.viewModel.rx.forceReload() }
+                .subscribe(onNext: { [weak self] posts in
+                    self?.segmentController.selectedSegmentIndex = PostSegmentValue.all.rawValue
+                    self?.data.accept(posts)
+                    self?.tableView.reloadData()
                 })
                 .disposed(by: self.disposeBag)
         }
@@ -127,6 +127,12 @@ class PostsViewController: UIViewController {
                 .bind(to: $0.rx.isHidden)
                 .disposed(by: self.disposeBag)
         }
+        
+        self.viewModel.rx.getPosts()
+            .subscribe(onNext: { [weak self] posts in
+                self?.data.accept(posts)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -166,17 +172,12 @@ class PostsViewController: UIViewController {
                 guard let `self` = self else {
                     return
                 }
-                self.viewModel.markAsRead(post: post)
-                let model = PostDetailModel(
-                    api: OMPGoogleDocsRepository(mocked: false),
-                    post: post)
-                let viewModel = PostDetailViewModel(model: model, context: self.viewModel.context)
-                let viewController = PostDetailViewController(viewModel: viewModel)
+                let viewController = self.viewModel.getDetailView(for: post)
                 self.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)
     }
-
+    
     private func reloadPosts() {
         guard let segment = PostSegmentValue(rawValue: self.segmentController.selectedSegmentIndex) else {
             return
