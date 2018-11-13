@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-pod install & xed .
+pod install && xed .
 ```
 
 ## Architecture

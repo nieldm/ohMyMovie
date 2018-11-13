@@ -67,7 +67,7 @@ class PostDetailDescriptionTableViewCell: UITableViewCell {
                     switch response.result {
                     case .failure(let error):
                         self.imageContainer.image = UIImage.from(color: UIColor.dusk36)
-                        print("🖼 \(error.localizedDescription)")
+                        Current.log("\(error.localizedDescription)")
                     default: ()
                     }
             }

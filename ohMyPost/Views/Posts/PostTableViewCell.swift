@@ -105,7 +105,7 @@ class PostTableViewCell: UITableViewCell {
                     switch response.result {
                     case .failure(let error):
                         self.postImageView.image = UIImage.from(color: UIColor.turquoiseBlue)
-                        print("🖼 \(error.localizedDescription)")
+                        Current.log("\(error.localizedDescription)")
                     default: ()
                     }
             }

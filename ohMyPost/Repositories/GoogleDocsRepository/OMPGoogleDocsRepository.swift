@@ -22,7 +22,7 @@ extension OMPGoogleDocsRepository: PostAPI {
             case .success(let response):
                 let input = InputStream(data: response.data)
                 guard let csv = try? CSVReader(stream: input) else {
-                    print("Error reading CSV")
+                    Current.log("Error reading CSV")
                     return callback([])
                 }
                 var posts: [Post] = []
@@ -33,7 +33,7 @@ extension OMPGoogleDocsRepository: PostAPI {
                 }
                 callback(posts)
             case .failure(let error):
-                print(error.localizedDescription)
+                Current.log(error.localizedDescription)
                 callback([])
             }
         }
