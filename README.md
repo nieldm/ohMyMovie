@@ -23,5 +23,9 @@ MVVM with Repositories and combined with RxSwift
     Library to create constraints in a more readable way, all the views in this example are created by code.
   - pod 'RxDataSources',     '~> 3.0'
     This one is a library with a diff algorithm to handle updates in TableViews and CollectionViews
+  - pod 'CSV.swift',         '~> 2.2.1'
+    Read CSV files
+  - pod 'AlamofireImage',    '~> 3.4'
+    Library to handle the download and cache of the images
 
 note: There is few things that can be improved, but it requires more time, i will add them in a future version
