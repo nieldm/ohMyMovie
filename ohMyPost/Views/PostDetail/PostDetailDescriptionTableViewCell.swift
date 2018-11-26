@@ -28,9 +28,9 @@ class PostDetailDescriptionTableViewCell: UITableViewCell {
             self.contentView.addSubview($0)
             $0.snp.makeConstraints { make in
                 make.top.equalTo(self.titleLabel.snp.bottom).offset(16)
-                make.left.equalToSuperview().offset(16)
-                make.right.equalToSuperview().inset(16)
-                make.height.equalTo(120)
+                make.centerX.equalToSuperview()
+                make.height.equalTo(280)
+                make.width.equalTo(self.imageContainer.snp.height).multipliedBy(0.7)
             }
             $0.contentMode = .scaleAspectFill
             $0.layer.addBorderAndShadow()

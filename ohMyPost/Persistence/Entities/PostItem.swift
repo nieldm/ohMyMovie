@@ -3,7 +3,7 @@ import CoreData
 import ohMyPostBase
 
 final class PostItem: NSManagedObject, Managed {
-    @NSManaged fileprivate(set) var postId: Int16
+    @NSManaged fileprivate(set) var postId: Int64
     @NSManaged fileprivate(set) var favorite: Bool
     @NSManaged fileprivate(set) var read: Bool
     @NSManaged fileprivate(set) var title: String
@@ -20,7 +20,7 @@ final class PostItem: NSManagedObject, Managed {
     }
     
     private func update(withPost post: Post) {
-        self.postId = Int16(post.id)
+        self.postId = Int64(post.id)
         self.title = post.title
         self.body = post.body
         self.imageUrl = post.image

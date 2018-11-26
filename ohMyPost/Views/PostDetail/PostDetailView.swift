@@ -16,7 +16,7 @@ class PostDetailView: UIView {
                 make.edges.equalToSuperview()
             }
             $0.rowHeight = UITableView.automaticDimension
-            $0.estimatedRowHeight = 120
+            $0.estimatedRowHeight = 240
             $0.backgroundColor = .lightGrayBG
             $0.register(PostDetailDescriptionTableViewCell.self, forCellReuseIdentifier: PostDetailDescriptionTableViewCell.identifier)
             $0.register(PostDetailUserTableViewCell.self, forCellReuseIdentifier: PostDetailUserTableViewCell.identifier)

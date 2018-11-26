@@ -22,6 +22,9 @@
 		B12AAB0B218F59F40061FE84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12AAB0A218F59F40061FE84 /* AppDelegate.swift */; };
 		B12AAB12218F59F50061FE84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B12AAB11218F59F50061FE84 /* Assets.xcassets */; };
 		B12AAB15218F59F50061FE84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B12AAB13218F59F50061FE84 /* LaunchScreen.storyboard */; };
+		B15A0CCA21A5F30200BA0643 /* TheMovieDBAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15A0CC921A5F30200BA0643 /* TheMovieDBAPI.swift */; };
+		B15A0CD121A5F64800BA0643 /* OMPTheMovieDBRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15A0CD021A5F64800BA0643 /* OMPTheMovieDBRepository.swift */; };
+		B15A0CD321A5FDC100BA0643 /* OMPTheMovieDBRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15A0CD221A5FDC100BA0643 /* OMPTheMovieDBRepositoryTest.swift */; };
 		B169B9122192233600D8FC91 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B9112192233600D8FC91 /* PostDetailViewController.swift */; };
 		B169B9142192236300D8FC91 /* PostDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B9132192236300D8FC91 /* PostDetailModel.swift */; };
 		B169B9162192239F00D8FC91 /* PostDetailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B9152192239F00D8FC91 /* PostDetailAPI.swift */; };
@@ -44,6 +47,8 @@
 		B169B949219250E600D8FC91 /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B948219250E600D8FC91 /* NSManagedObjectContext+Extensions.swift */; };
 		B169B94B2192513900D8FC91 /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B169B94A2192513900D8FC91 /* Managed.swift */; };
 		B169B94E219293B600D8FC91 /* postsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = B169B94D219293B600D8FC91 /* postsResponse.json */; };
+		B171213121AC9271002EC25D /* OMPMovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B171213021AC9271002EC25D /* OMPMovieResponse.swift */; };
+		B171213321AC92B1002EC25D /* OMPMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B171213221AC92B1002EC25D /* OMPMovie.swift */; };
 		B194F930218F72BA0057C0C3 /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194F92F218F72BA0057C0C3 /* StyleGuide.swift */; };
 		B194F936218F75410057C0C3 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194F934218F75410057C0C3 /* PostTableViewCell.swift */; };
 		B194F937218F75410057C0C3 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194F935218F75410057C0C3 /* PostsViewController.swift */; };
@@ -137,6 +142,9 @@
 		B12AAB14218F59F50061FE84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B12AAB16218F59F50061FE84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B12AAB1B218F59F50061FE84 /* ohMyPostTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ohMyPostTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B15A0CC921A5F30200BA0643 /* TheMovieDBAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMovieDBAPI.swift; sourceTree = "<group>"; };
+		B15A0CD021A5F64800BA0643 /* OMPTheMovieDBRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OMPTheMovieDBRepository.swift; sourceTree = "<group>"; };
+		B15A0CD221A5FDC100BA0643 /* OMPTheMovieDBRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMPTheMovieDBRepositoryTest.swift; sourceTree = "<group>"; };
 		B169B9112192233600D8FC91 /* PostDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		B169B9132192236300D8FC91 /* PostDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailModel.swift; sourceTree = "<group>"; };
 		B169B9152192239F00D8FC91 /* PostDetailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailAPI.swift; sourceTree = "<group>"; };
@@ -159,6 +167,8 @@
 		B169B948219250E600D8FC91 /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
 		B169B94A2192513900D8FC91 /* Managed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Managed.swift; sourceTree = "<group>"; };
 		B169B94D219293B600D8FC91 /* postsResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = postsResponse.json; sourceTree = "<group>"; };
+		B171213021AC9271002EC25D /* OMPMovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMPMovieResponse.swift; sourceTree = "<group>"; };
+		B171213221AC92B1002EC25D /* OMPMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMPMovie.swift; sourceTree = "<group>"; };
 		B194F92F218F72BA0057C0C3 /* StyleGuide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
 		B194F934218F75410057C0C3 /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		B194F935218F75410057C0C3 /* PostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
@@ -258,6 +268,7 @@
 		B118F020218F60E400E7DBB8 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				B15A0CC921A5F30200BA0643 /* TheMovieDBAPI.swift */,
 				B1FA09B02198855A00D9E508 /* GoogleDocsAPI.swift */,
 				B169B94C219293B600D8FC91 /* Mocks */,
 			);
@@ -309,6 +320,7 @@
 		B118F05B218F68A500E7DBB8 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				B15A0CCF21A5F64800BA0643 /* TheMovieDB */,
 				B1FA09BA2198881100D9E508 /* GoogleDocsRepository */,
 			);
 			path = Repositories;
@@ -363,6 +375,17 @@
 				B114B512219A518E00C0440D /* World.swift */,
 			);
 			path = ohMyPost;
+			sourceTree = "<group>";
+		};
+		B15A0CCF21A5F64800BA0643 /* TheMovieDB */ = {
+			isa = PBXGroup;
+			children = (
+				B15A0CD021A5F64800BA0643 /* OMPTheMovieDBRepository.swift */,
+				B15A0CD221A5FDC100BA0643 /* OMPTheMovieDBRepositoryTest.swift */,
+				B171213021AC9271002EC25D /* OMPMovieResponse.swift */,
+				B171213221AC92B1002EC25D /* OMPMovie.swift */,
+			);
+			path = TheMovieDB;
 			sourceTree = "<group>";
 		};
 		B169B9102192233600D8FC91 /* PostDetail */ = {
@@ -933,11 +956,15 @@
 				B169B94B2192513900D8FC91 /* Managed.swift in Sources */,
 				B169B9392192468500D8FC91 /* PostDetailCommentDetailTableViewCell.swift in Sources */,
 				B169B926219230C600D8FC91 /* PostDetailView.swift in Sources */,
+				B15A0CCA21A5F30200BA0643 /* TheMovieDBAPI.swift in Sources */,
 				B1FA09B7219886E000D9E508 /* OMPGoogleDocsRepository.swift in Sources */,
+				B171213121AC9271002EC25D /* OMPMovieResponse.swift in Sources */,
 				B169B92F2192341B00D8FC91 /* PostDetailDescriptionTableViewCell.swift in Sources */,
 				B169B9122192233600D8FC91 /* PostDetailViewController.swift in Sources */,
+				B15A0CD121A5F64800BA0643 /* OMPTheMovieDBRepository.swift in Sources */,
 				B194F937218F75410057C0C3 /* PostsViewController.swift in Sources */,
 				B12AAB0B218F59F40061FE84 /* AppDelegate.swift in Sources */,
+				B171213321AC92B1002EC25D /* OMPMovie.swift in Sources */,
 				B169B9332192344000D8FC91 /* PostDetailCommentTableViewCell.swift in Sources */,
 				B169B92221922D6100D8FC91 /* SectionOfPosts.swift in Sources */,
 				B1EA1E7F218F9E0F00C953A0 /* PostViewModel.swift in Sources */,
@@ -952,6 +979,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B169B91C219226DB00D8FC91 /* PostDetailModelTest.swift in Sources */,
+				B15A0CD321A5FDC100BA0643 /* OMPTheMovieDBRepositoryTest.swift in Sources */,
 				B1FA09B92198878100D9E508 /* OMPGoogleDocsRepositoryTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

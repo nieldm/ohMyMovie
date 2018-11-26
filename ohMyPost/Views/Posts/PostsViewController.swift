@@ -17,7 +17,6 @@ class PostsViewController: UIViewController {
     private let disposeBag = DisposeBag()
     fileprivate let data = BehaviorRelay<[Post]>(value: [])
     private lazy var segmentController = UISegmentedControl(frame: .zero)
-    private lazy var deleteAllButton = UIButton(frame: .zero)
     private lazy var noResults = UILabel(frame: .zero)
     
     fileprivate var tableView: UITableView! {
@@ -69,7 +68,7 @@ class PostsViewController: UIViewController {
             }
             $0.insertSegment(withTitle: "All", at: PostSegmentValue.all.rawValue, animated: false)
             $0.insertSegment(withTitle: "Favorite", at: PostSegmentValue.favorite.rawValue, animated: false)
-            $0.insertSegment(withTitle: "Unread", at: PostSegmentValue.unread.rawValue, animated: false)
+            $0.insertSegment(withTitle: "UnWatched", at: PostSegmentValue.unread.rawValue, animated: false)
             $0.selectedSegmentIndex = 0
             $0.tintColor = .turquoiseBlue
             $0.rx.controlEvent(UIControlEvents.valueChanged)
@@ -79,31 +78,14 @@ class PostsViewController: UIViewController {
                 .disposed(by: self.disposeBag)
         }
         
-        self.deleteAllButton.do {
-            self.view.addSubview($0)
-            $0.snp.makeConstraints { make in
-                make.bottom.equalTo(self.view.snp.bottomMargin)
-                make.left.right.equalToSuperview()
-                make.height.equalTo(44)
-            }
-            $0.setTitle("Delete All", for: .normal)
-            $0.setTitleColor(.red, for: .normal)
-            $0.rx.tap
-                .map { _ -> [Post] in
-                    return []
-                }
-                .bind(to: self.data)
-                .disposed(by: self.disposeBag)
-        }
-        
         self.tableView = UITableView(frame: .zero, style: .plain).then {
             self.view.addSubview($0)
             $0.snp.makeConstraints { make in
                 make.top.equalTo(self.segmentController.snp.bottom).offset(8)
                 make.left.right.equalToSuperview()
-                make.bottom.equalTo(self.deleteAllButton.snp.top)
+                make.bottom.equalToSuperview()
             }
-            $0.rowHeight = 120
+            $0.rowHeight = 160
             $0.backgroundColor = .lightGrayBG
             $0.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
             $0.showsVerticalScrollIndicator = false

@@ -41,7 +41,7 @@ extension UIFont {
     }
     
     class var OMPTitle: UIFont {
-        return UIFont.systemFont(ofSize: 14.0, weight: .semibold)
+        return UIFont.systemFont(ofSize: 18.0, weight: .semibold)
     }
     
     class var OMPSubTitle: UIFont {

@@ -29,7 +29,7 @@ class PostTableViewCell: UITableViewCell {
             self.contentView.addSubview($0)
             $0.snp.makeConstraints { make in
                 make.right.top.bottom.equalToSuperview()
-                make.height.equalTo(self.postImageView.snp.width)
+                make.width.equalTo(self.postImageView.snp.height).multipliedBy(0.7)
             }
             $0.backgroundColor = UIColor.turquoiseBlue
             $0.layer.addBorder()
@@ -41,8 +41,7 @@ class PostTableViewCell: UITableViewCell {
             self.contentView.addSubview($0)
             $0.snp.makeConstraints { make in
                 make.size.equalTo(ViewOffset.small.rawValue)
-                make.left.equalToSuperview().offset(ViewOffset.small.rawValue)
-                make.centerY.equalToSuperview()
+                make.left.top.equalToSuperview().offset(ViewOffset.small.rawValue)
             }
             $0.image = UIImage(named: "unread")
             $0.isHidden = true
@@ -67,7 +66,7 @@ class PostTableViewCell: UITableViewCell {
                 make.left.equalTo(self.iconImageView.snp.right).offset(ViewOffset.small.rawValue)
                 make.right.equalTo(self.postImageView.snp.left).offset(-ViewOffset.small.rawValue)
             }
-            $0.numberOfLines = 1
+            $0.numberOfLines = 2
             $0.text = "Title"
             $0.font = UIFont.OMPTitle
             $0.textColor = UIColor.dusk
@@ -80,7 +79,7 @@ class PostTableViewCell: UITableViewCell {
                 make.left.equalTo(self.titleLabel.snp.left)
                 make.right.equalTo(self.postImageView.snp.left).offset(-ViewOffset.small.rawValue)
             }
-            $0.numberOfLines = 2
+            $0.numberOfLines = 4
             $0.text = "SubTitle"
             $0.font = UIFont.OMPSubTitle
             $0.textColor = UIColor.wisteria
