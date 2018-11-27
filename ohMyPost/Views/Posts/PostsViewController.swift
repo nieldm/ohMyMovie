@@ -18,6 +18,7 @@ enum MovieCategory: Int {
 
 class PostsViewController: UIViewController {
 
+    private var launching = true
     private let viewModel: PostViewModel
     private let disposeBag = DisposeBag()
     fileprivate let data = BehaviorRelay<[Post]>(value: [])
@@ -147,7 +148,7 @@ class PostsViewController: UIViewController {
         }
         
 
-        self.viewModel.rx.getPosts()
+        self.viewModel.rx.getPosts(withCategory: actualCategory)
             .subscribe(onNext: { [weak self] posts in
                 self?.data.accept(posts)
             })
@@ -155,6 +156,10 @@ class PostsViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        guard !launching else {
+            launching = false
+            return
+        }
         super.viewDidAppear(animated)
         self.reloadPosts()
         self.tableView.reloadData()

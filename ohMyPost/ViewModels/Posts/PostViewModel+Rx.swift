@@ -63,6 +63,12 @@ extension Reactive where Base == PostViewModel {
         return self.loadPosts().flatMap { _ in self.getPostsFromPersistence() }
     }
     
+    func getPosts(withCategory category: MovieCategory) -> Observable<[Post]> {
+        return self.loadPost(byCategory: category)
+            .flatMap { _ in Observable<Int>.timer(0.5, scheduler: MainScheduler.instance) }
+            .flatMap { _ in self.getPostsFromPersistence() }
+    }
+    
     func getFiltered(withCategory category: MovieCategory) -> Observable<[Post]> {
         return Observable.create { observer in
             self.base.getFavoritePosts(withCategory: category) { posts in
@@ -83,7 +89,7 @@ extension Reactive where Base == PostViewModel {
         }
     }
     
-    func getPost(byCategory category: MovieCategory) -> Observable<[Post]> {
+    func loadPost(byCategory category: MovieCategory) -> Observable<[Post]> {
         return Observable.create { observer in
             self.base.model.loadPosts(byCategory: category.rawValue) { posts in
                 posts.forEach { let _ = PostItem.insertOrUpdate(into: self.base.context, post: $0) }
@@ -103,7 +109,7 @@ extension Reactive where Base == PostViewModel {
     }
     
     func getByCategory(category: MovieCategory) -> Observable<[Post]> {
-        return self.getPost(byCategory: category)
+        return self.loadPost(byCategory: category)
     }
     
 }
