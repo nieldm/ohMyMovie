@@ -14,8 +14,9 @@ class OMPTheMovieDBRepository {
     }
 }
 
-extension OMPTheMovieDBRepository: PostAPI {
-    func getPosts(byCategory: Int, callback: @escaping ([Post]) -> ()) {
+extension OMPTheMovieDBRepository: ResourceAPI {
+    
+    func getResource(byCategory: Int, callback: @escaping ([Resource]) -> ()) {
         guard let category = MovieCategory(rawValue: byCategory) else {
             callback([])
             return
@@ -34,7 +35,7 @@ extension OMPTheMovieDBRepository: PostAPI {
             case .success(let response):
                 do {
                     let results: OMPMovieResponse = try JSONDecoder().decode(OMPMovieResponse.self, from: response.data)
-                    return callback(results.results.map { $0.toPost(category: category) })
+                    return callback(results.results.map { $0.toResource(category: category) })
                 } catch {
                     Current.log("error \(error.localizedDescription)")
                 }
@@ -47,23 +48,23 @@ extension OMPTheMovieDBRepository: PostAPI {
         }
     }
     
-    func getPosts(callback: @escaping ([Post]) -> ()) {
-        self.getPosts(byCategory: MovieCategory.popular.rawValue, callback: callback)
+    func getResource(callback: @escaping ([Resource]) -> ()) {
+        self.getResource(byCategory: MovieCategory.popular.rawValue, callback: callback)
     }
 }
 
-extension OMPTheMovieDBRepository: PostDetailAPI {
+extension OMPTheMovieDBRepository: ResourceDetailAPI {
     
     func getUser(userId: Int, callback: @escaping (User?) -> ()) {}
     
-    func getComment(postId: Int, callback: @escaping ([Comment]) -> ()) {}
+    func getComment(resourceId: Int, callback: @escaping ([Comment]) -> ()) {}
     
 }
 
 
-private extension Post {
-    static func create(fromData data: [String], withId id: Int) -> Post {
-        return Post(
+private extension Resource {
+    static func create(fromData data: [String], withId id: Int) -> Resource {
+        return Resource(
             id: id,
             userId: 0,
             title: data[0],

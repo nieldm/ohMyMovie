@@ -1,7 +1,7 @@
 import Foundation
 import Then
 
-public struct Post: Codable, Then {
+public struct Resource: Codable, Then {
     public let id: Int
     public let userId: Int
     public let title: String
@@ -30,8 +30,8 @@ public struct Post: Codable, Then {
     }
 }
 
-extension Post: Equatable {
-    public static func ==(lhs: Post, rhs: Post) -> Bool {
+extension Resource: Equatable {
+    public static func ==(lhs: Resource, rhs: Resource) -> Bool {
         return lhs.id == rhs.id && lhs.read == rhs.read && lhs.favorited == rhs.favorited
     }
 }

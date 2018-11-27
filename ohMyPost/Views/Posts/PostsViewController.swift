@@ -21,7 +21,7 @@ class PostsViewController: UIViewController {
     private var launching = true
     private let viewModel: PostViewModel
     private let disposeBag = DisposeBag()
-    fileprivate let data = BehaviorRelay<[Post]>(value: [])
+    fileprivate let data = BehaviorRelay<[Resource]>(value: [])
     private lazy var segmentController = UISegmentedControl(frame: .zero)
     private lazy var categorySegmentController = UISegmentedControl(frame: .zero)
     private lazy var noResults = UILabel(frame: .zero)
@@ -40,7 +40,7 @@ class PostsViewController: UIViewController {
     }
     
     init(managedObjectContext: NSManagedObjectContext) {
-        let model = PostModel(api: Current.postApi())
+        let model = ResourceModel(api: Current.postApi())
         self.viewModel = PostViewModel(
             model: model,
             managedObjectContext: managedObjectContext
@@ -54,10 +54,10 @@ class PostsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Posts"
+        self.title = "Movies"
         self.view.do {
             $0.backgroundColor = .lightGrayBG
-            $0.accessibilityIdentifier = "postView"
+            $0.accessibilityIdentifier = "moviesView"
         }
         
         UIBarButtonItem(barButtonSystemItem: .refresh, target: nil, action: nil).do {
@@ -161,12 +161,12 @@ class PostsViewController: UIViewController {
             return
         }
         super.viewDidAppear(animated)
-        self.reloadPosts()
+        self.reloadResource()
         self.tableView.reloadData()
     }
     
     private func configureTableView() {
-        let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfPosts>(configureCell: { (_, tv: UITableView, ip: IndexPath, item: Post) -> UITableViewCell in
+        let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfPosts>(configureCell: { (_, tv: UITableView, ip: IndexPath, item: Resource) -> UITableViewCell in
             guard let cell = tv.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: ip) as? PostTableViewCell else {
                 return UITableViewCell(frame: .zero)
             }
@@ -183,14 +183,14 @@ class PostsViewController: UIViewController {
         
         let _ = self.tableView.rx.setDelegate(self)
         
-        self.tableView.rx.modelDeleted(Post.self)
+        self.tableView.rx.modelDeleted(Resource.self)
             .subscribe { [weak self] event in
                 let result = self?.data.value.filter { event.element != $0 } ?? []
                 self?.data.accept(result)
             }
             .disposed(by: disposeBag)
 
-        self.tableView.rx.modelSelected(Post.self)
+        self.tableView.rx.modelSelected(Resource.self)
             .asDriver()
             .drive(onNext: { [weak self] post in
                 guard let `self` = self else {
@@ -202,7 +202,7 @@ class PostsViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func reloadPosts() {
+    private func reloadResource() {
         guard let segment = PostSegmentValue(rawValue: self.segmentController.selectedSegmentIndex) else {
             return
         }

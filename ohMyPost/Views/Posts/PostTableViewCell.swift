@@ -87,7 +87,7 @@ class PostTableViewCell: UITableViewCell {
 
     }
     
-    func set(data: Post, context: NSManagedObjectContext) {
+    func set(data: Resource, context: NSManagedObjectContext) {
         self.titleLabel.text = data.title.capitalized
         self.subTitleLabel.text = data.body
         
@@ -111,7 +111,7 @@ class PostTableViewCell: UITableViewCell {
         }
         
         DispatchQueue.global(qos: .userInitiated).async {
-            let request = NSFetchRequest<PostItem>(entityName: "PostItem")
+            let request = NSFetchRequest<ResourceItem>(entityName: "ResourceItem")
             request.predicate = NSPredicate(format: "postId == %i", data.id)
             
             let items = try? context.fetch(request)

@@ -5,25 +5,25 @@ import CoreData
 class PostViewModel {
     
     let context: NSManagedObjectContext
-    let model: PostModel
+    let model: ResourceModel
     
-    init(model: PostModel, managedObjectContext: NSManagedObjectContext) {
+    init(model: ResourceModel, managedObjectContext: NSManagedObjectContext) {
         self.model = model
         self.context = managedObjectContext
     }
     
-    func getDetailView(for post: Post) -> PostDetailViewController {
+    func getDetailView(for post: Resource) -> PostDetailViewController {
         self.markAsRead(post: post)
-        let model = PostDetailModel(
+        let model = ResourceDetailModel(
             api: Current.postDetailApi(),
-            post: post)
+            resource: post)
         let viewModel = PostDetailViewModel(model: model, context: self.context)
         let viewController = PostDetailViewController(viewModel: viewModel)
         return viewController
     }
     
-    func markAsRead(post: Post) {
-        PostItem.insertOrUpdate(
+    func markAsRead(post: Resource) {
+        ResourceItem.insertOrUpdate(
             into: self.context,
             post: post.with {
                 $0.read = true
@@ -31,19 +31,19 @@ class PostViewModel {
         )
     }
     
-    func getFavoritePosts(withCategory category: MovieCategory, callback: @escaping ([Post]) -> ()) {
-        let request = NSFetchRequest<PostItem>(entityName: "PostItem")
+    func getFavoritePosts(withCategory category: MovieCategory, callback: @escaping ([Resource]) -> ()) {
+        let request = NSFetchRequest<ResourceItem>(entityName: "ResourceItem")
         request.predicate = NSPredicate(format: "favorite == YES AND category == %i", category.rawValue)
         
-        let items = try? context.fetch(request).map { $0.toPost() }
+        let items = try? context.fetch(request).map { $0.toResource() }
         callback(items ?? [])
     }
     
-    func getReadedPosts(withCategory category: MovieCategory, callback: @escaping ([Post]) -> ()) {
-        let request = NSFetchRequest<PostItem>(entityName: "PostItem")
+    func getReadedPosts(withCategory category: MovieCategory, callback: @escaping ([Resource]) -> ()) {
+        let request = NSFetchRequest<ResourceItem>(entityName: "ResourceItem")
         request.predicate = NSPredicate(format: "read == NO AND category == %i", category.rawValue)
         
-        let items = try? context.fetch(request).map { $0.toPost() }
+        let items = try? context.fetch(request).map { $0.toResource() }
         callback(items ?? [])
     }
     

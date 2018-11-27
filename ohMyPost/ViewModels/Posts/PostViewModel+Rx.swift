@@ -7,22 +7,22 @@ extension PostViewModel: ReactiveCompatible {}
 
 extension Reactive where Base == PostViewModel {
     
-    func getPostsFromPersistence() -> Observable<[Post]> {
-        let request = NSFetchRequest<PostItem>(entityName: "PostItem")
-        let items = try? self.base.context.fetch(request).map { $0.toPost() }
-        return Observable<[Post]>.of(items ?? [])
+    func getPostsFromPersistence() -> Observable<[Resource]> {
+        let request = NSFetchRequest<ResourceItem>(entityName: "ResourceItem")
+        let items = try? self.base.context.fetch(request).map { $0.toResource() }
+        return Observable<[Resource]>.of(items ?? [])
     }
     
-    func getPostsFromPersistence(withCategory category: MovieCategory) -> Observable<[Post]> {
-        let request = NSFetchRequest<PostItem>(entityName: "PostItem")
+    func getPostsFromPersistence(withCategory category: MovieCategory) -> Observable<[Resource]> {
+        let request = NSFetchRequest<ResourceItem>(entityName: "ResourceItem")
         request.predicate = NSPredicate(format: "category == %i", category.rawValue)
-        let items = try? self.base.context.fetch(request).map { $0.toPost() }
-        return Observable<[Post]>.of(items ?? [])
+        let items = try? self.base.context.fetch(request).map { $0.toResource() }
+        return Observable<[Resource]>.of(items ?? [])
     }
     
     private func resetAll() -> Single<Void> {
         return Single<Void>.create { observer in
-            let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "PostItem")
+            let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "ResourceItem")
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
             do
             {
@@ -40,10 +40,10 @@ extension Reactive where Base == PostViewModel {
 
     }
     
-    private func loadPosts() -> Observable<[Post]> {
+    private func loadResource() -> Observable<[Resource]> {
         return Observable.create { observer in
-            self.base.model.loadPosts(callback: { (posts) in
-                posts.forEach { let _ = PostItem.insertOrUpdate(into: self.base.context, post: $0) }
+            self.base.model.loadResource(callback: { (posts) in
+                posts.forEach { let _ = ResourceItem.insertOrUpdate(into: self.base.context, post: $0) }
                 observer.onNext(posts)
                 observer.onCompleted()
             })
@@ -51,25 +51,25 @@ extension Reactive where Base == PostViewModel {
         }
     }
     
-    func forceReload() -> Observable<[Post]> {
+    func forceReload() -> Observable<[Resource]> {
         return self.resetAll()
             .asObservable()
-            .flatMap { _ -> Observable<[Post]> in
-                return self.loadPosts()
+            .flatMap { _ -> Observable<[Resource]> in
+                return self.loadResource()
             }
     }
     
-    func getPosts() -> Observable<[Post]> {
-        return self.loadPosts().flatMap { _ in self.getPostsFromPersistence() }
+    func getPosts() -> Observable<[Resource]> {
+        return self.loadResource().flatMap { _ in self.getPostsFromPersistence() }
     }
     
-    func getPosts(withCategory category: MovieCategory) -> Observable<[Post]> {
+    func getPosts(withCategory category: MovieCategory) -> Observable<[Resource]> {
         return self.loadPost(byCategory: category)
             .flatMap { _ in Observable<Int>.timer(0.5, scheduler: MainScheduler.instance) }
             .flatMap { _ in self.getPostsFromPersistence() }
     }
     
-    func getFiltered(withCategory category: MovieCategory) -> Observable<[Post]> {
+    func getFiltered(withCategory category: MovieCategory) -> Observable<[Resource]> {
         return Observable.create { observer in
             self.base.getFavoritePosts(withCategory: category) { posts in
                 observer.onNext(posts)
@@ -79,7 +79,7 @@ extension Reactive where Base == PostViewModel {
         }
     }
     
-    func getUnread(withCategory category: MovieCategory) -> Observable<[Post]> {
+    func getUnread(withCategory category: MovieCategory) -> Observable<[Resource]> {
         return Observable.create { observer in
             self.base.getReadedPosts(withCategory: category) { posts in
                 observer.onNext(posts)
@@ -89,10 +89,10 @@ extension Reactive where Base == PostViewModel {
         }
     }
     
-    func loadPost(byCategory category: MovieCategory) -> Observable<[Post]> {
+    func loadPost(byCategory category: MovieCategory) -> Observable<[Resource]> {
         return Observable.create { observer in
-            self.base.model.loadPosts(byCategory: category.rawValue) { posts in
-                posts.forEach { let _ = PostItem.insertOrUpdate(into: self.base.context, post: $0) }
+            self.base.model.loadResource(byCategory: category.rawValue) { posts in
+                posts.forEach { let _ = ResourceItem.insertOrUpdate(into: self.base.context, post: $0) }
                 observer.onNext(posts)
                 observer.onCompleted()
             }
@@ -100,7 +100,7 @@ extension Reactive where Base == PostViewModel {
         }
     }
     
-    func getBySegment(segment: PostSegmentValue, withCategory category: MovieCategory) -> Observable<[Post]> {
+    func getBySegment(segment: PostSegmentValue, withCategory category: MovieCategory) -> Observable<[Resource]> {
         switch segment {
         case .all: return self.getPostsFromPersistence(withCategory: category)
         case .favorite: return self.getFiltered(withCategory: category)
@@ -108,7 +108,7 @@ extension Reactive where Base == PostViewModel {
         }
     }
     
-    func getByCategory(category: MovieCategory) -> Observable<[Post]> {
+    func getByCategory(category: MovieCategory) -> Observable<[Resource]> {
         return self.loadPost(byCategory: category)
     }
     

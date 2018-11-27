@@ -9,15 +9,15 @@ class PostDetailViewModel {
     let context: NSManagedObjectContext
     private let disposeBag = DisposeBag()
     
-    let model: PostDetailModel
+    let model: ResourceDetailModel
     let data: BehaviorRelay<[SectionOfPostDetail]>
     
-    init(model: PostDetailModel, context: NSManagedObjectContext) {
+    init(model: ResourceDetailModel, context: NSManagedObjectContext) {
         self.model = model
         self.context = context
         let postSection = SectionOfPostDetail(
             header: "Description",
-            items: [PostDetailSection.post(model.post)]
+            items: [PostDetailSection.resource(model.resource)]
         )
         self.data = BehaviorRelay<[SectionOfPostDetail]>(value: [postSection])
     }
@@ -59,8 +59,8 @@ class PostDetailViewModel {
     }
     
     func markAsFavorite(callback: @escaping (Bool) -> ()) {
-        let request = NSFetchRequest<PostItem>(entityName: "PostItem")
-        request.predicate = NSPredicate(format: "postId == %i", model.post.id)
+        let request = NSFetchRequest<ResourceItem>(entityName: "ResourceItem")
+        request.predicate = NSPredicate(format: "postId == %i", model.resource.id)
         
         let items = try? context.fetch(request)
         items?.forEach { item in
@@ -73,8 +73,8 @@ class PostDetailViewModel {
     }
     
     func getFavoritedState(callback: @escaping (Bool) -> ()) {
-        let request = NSFetchRequest<PostItem>(entityName: "PostItem")
-        request.predicate = NSPredicate(format: "postId == %i", model.post.id)
+        let request = NSFetchRequest<ResourceItem>(entityName: "ResourceItem")
+        request.predicate = NSPredicate(format: "postId == %i", model.resource.id)
         
         let items = try? context.fetch(request)
         if let item = items?.first {

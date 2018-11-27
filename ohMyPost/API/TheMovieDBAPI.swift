@@ -33,10 +33,9 @@ extension TheMovieDBAPI: TargetType {
     
     var sampleData: Data {
         switch self {
-//        case .list(_):
         default:
             guard let
-                path = Bundle.main.path(forResource: "postResponse", ofType: "json"),
+                path = Bundle.main.path(forResource: "moviesResponse", ofType: "json"),
                 let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
                     return Data()
             }

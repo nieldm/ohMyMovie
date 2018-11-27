@@ -18,9 +18,9 @@ struct OMPMovie: Codable {
         case releaseDate = "release_date"
     }
     
-    func toPost(category: MovieCategory) -> Post {
+    func toResource(category: MovieCategory) -> Resource {
         let imageUrl = "https://image.tmdb.org/t/p/w500\(self.posterPath)"
-        return Post(
+        return Resource(
             id: self.id,
             userId: 0,
             title: self.title,

@@ -35,12 +35,12 @@ class PostDetailView: UIView {
         let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfPostDetail>(configureCell: { (_, tv: UITableView, ip: IndexPath, item: PostDetailSection) -> UITableViewCell in
 
             switch item {
-            case .post(let post):
+            case .resource(let resource):
                 guard let cell = tv.dequeueReusableCell(withIdentifier: PostDetailDescriptionTableViewCell.identifier, for: ip) as? PostDetailDescriptionTableViewCell else {
                     return UITableViewCell(frame: .zero)
                 }
                 return cell.then {
-                    $0.set(data: post)
+                    $0.set(data: resource)
                 }
             case .user(let user):
                 guard let cell = tv.dequeueReusableCell(withIdentifier: PostDetailUserTableViewCell.identifier, for: ip) as? PostDetailUserTableViewCell else {
