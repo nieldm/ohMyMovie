@@ -51,7 +51,7 @@ class PostDetailDescriptionTableViewCell: UITableViewCell {
         }
     }
     
-    func set(data: Post) {
+    func set(data: Resource) {
         self.titleLabel.text = data.title.capitalized
         self.bodyLabel.text = data.body
         if let imageUrl = data.image,

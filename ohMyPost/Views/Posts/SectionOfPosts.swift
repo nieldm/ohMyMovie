@@ -11,7 +11,7 @@ struct SectionOfPosts {
 
 extension SectionOfPosts: AnimatableSectionModelType {
     
-    typealias Item = Post
+    typealias Item = Resource
     typealias Identity = String
     
     init(original: SectionOfPosts, items: [Item]) {
@@ -25,7 +25,7 @@ extension SectionOfPosts: AnimatableSectionModelType {
     
 }
 
-extension Post: IdentifiableType {
+extension Resource: IdentifiableType {
     
     public typealias Identity = Int
     

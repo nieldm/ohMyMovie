@@ -21,13 +21,13 @@ class ohMyPostUITests: XCTestCase {
     func test_showPostView() {
         app.launch()
         
-        XCTAssertTrue(app.isShowingPostView)
+        XCTAssertTrue(app.isShowingResourceView)
     }
     
     func test_showPostToPostDetailView() {
         app.launch()
         
-        XCTAssertTrue(app.isShowingPostView)
+        XCTAssertTrue(app.isShowingResourceView)
 
         let table = app.postsTableView
         let cell = table.cells.element(boundBy: 0)
@@ -42,8 +42,8 @@ class ohMyPostUITests: XCTestCase {
 }
 
 extension XCUIApplication {
-    var isShowingPostView: Bool {
-        return otherElements["postView"].exists
+    var isShowingResourceView: Bool {
+        return otherElements["moviesView"].exists
     }
     
     var isShowingPostDetailView: Bool {

@@ -1,14 +1,14 @@
 import XCTest
 @testable import ohMyPostBase
 
-class PostDetailModelTest: XCTestCase {
+class ResourceDetailModelTest: XCTestCase {
 
-    var sut: PostDetailModel!
+    var sut: ResourceDetailModel!
     
     override func setUp() {
-        self.sut = PostDetailModel(
+        self.sut = ResourceDetailModel(
             api: MockedAPI(),
-            post: Post(id: 0, userId: 0, title: "Test", body: "TestCase", image: nil)
+            resource: Resource(id: 0, userId: 0, title: "Test", body: "TestCase", image: nil)
         )
     }
 
@@ -28,7 +28,7 @@ class PostDetailModelTest: XCTestCase {
 
 class MockedAPI {}
 
-extension MockedAPI: PostDetailAPI {
+extension MockedAPI: ResourceDetailAPI {
     func getUser(userId: Int, callback: (User?) -> ()) {
         callback(User(
             id: 0,
@@ -40,7 +40,7 @@ extension MockedAPI: PostDetailAPI {
         ))
     }
     
-    func getComment(postId: Int, callback: @escaping ([Comment]) -> ()) {
+    func getComment(resourceId: Int, callback: @escaping ([Comment]) -> ()) {
         callback([Comment(id: 0, name: "nieldm", email: "nieldm@gmail.com", body: "Hello World")])
     }
 }
