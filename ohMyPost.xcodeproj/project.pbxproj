@@ -56,9 +56,6 @@
 		B1EA1E81218F9F0A00C953A0 /* PostViewModel+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EA1E80218F9F0A00C953A0 /* PostViewModel+Rx.swift */; };
 		B1FA09B12198855A00D9E508 /* GoogleDocsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA09B02198855A00D9E508 /* GoogleDocsAPI.swift */; };
 		B1FA09B32198865300D9E508 /* testApplicationData.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1FA09B22198865300D9E508 /* testApplicationData.csv */; };
-		B1FA09B7219886E000D9E508 /* OMPGoogleDocsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA09B6219886E000D9E508 /* OMPGoogleDocsRepository.swift */; };
-		B1FA09B92198878100D9E508 /* OMPGoogleDocsRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA09B82198878100D9E508 /* OMPGoogleDocsRepositoryTest.swift */; };
-		B1FA09BC21991F9A00D9E508 /* OMPGoogleDocsRepository+PostDetailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA09BB21991F9A00D9E508 /* OMPGoogleDocsRepository+PostDetailAPI.swift */; };
 		BF0BD0CC36FD556C57D5E887 /* Pods_ohMyPost_ohMyPostBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E294C3020D0F98AD85395ACA /* Pods_ohMyPost_ohMyPostBase.framework */; };
 		E6CCF9A36FDB8D6ED3D84544 /* Pods_ohMyPost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D36A99039FE8A8451F6F15 /* Pods_ohMyPost.framework */; };
 /* End PBXBuildFile section */
@@ -176,9 +173,6 @@
 		B1EA1E80218F9F0A00C953A0 /* PostViewModel+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostViewModel+Rx.swift"; sourceTree = "<group>"; };
 		B1FA09B02198855A00D9E508 /* GoogleDocsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDocsAPI.swift; sourceTree = "<group>"; };
 		B1FA09B22198865300D9E508 /* testApplicationData.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testApplicationData.csv; sourceTree = "<group>"; };
-		B1FA09B6219886E000D9E508 /* OMPGoogleDocsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMPGoogleDocsRepository.swift; sourceTree = "<group>"; };
-		B1FA09B82198878100D9E508 /* OMPGoogleDocsRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMPGoogleDocsRepositoryTest.swift; sourceTree = "<group>"; };
-		B1FA09BB21991F9A00D9E508 /* OMPGoogleDocsRepository+PostDetailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OMPGoogleDocsRepository+PostDetailAPI.swift"; sourceTree = "<group>"; };
 		DE27F42C9E70158C0D7CC46B /* Pods-ohMyPostTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ohMyPostTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ohMyPostTests/Pods-ohMyPostTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E294C3020D0F98AD85395ACA /* Pods_ohMyPost_ohMyPostBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ohMyPost_ohMyPostBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E725D0C9EBBDF838F48BB2F5 /* Pods-ohMyPost-ohMyPostBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ohMyPost-ohMyPostBase.release.xcconfig"; path = "Pods/Target Support Files/Pods-ohMyPost-ohMyPostBase/Pods-ohMyPost-ohMyPostBase.release.xcconfig"; sourceTree = "<group>"; };
@@ -321,7 +315,6 @@
 			isa = PBXGroup;
 			children = (
 				B15A0CCF21A5F64800BA0643 /* TheMovieDB */,
-				B1FA09BA2198881100D9E508 /* GoogleDocsRepository */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -475,16 +468,6 @@
 				B1EA1E80218F9F0A00C953A0 /* PostViewModel+Rx.swift */,
 			);
 			path = Posts;
-			sourceTree = "<group>";
-		};
-		B1FA09BA2198881100D9E508 /* GoogleDocsRepository */ = {
-			isa = PBXGroup;
-			children = (
-				B1FA09B6219886E000D9E508 /* OMPGoogleDocsRepository.swift */,
-				B1FA09B82198878100D9E508 /* OMPGoogleDocsRepositoryTest.swift */,
-				B1FA09BB21991F9A00D9E508 /* OMPGoogleDocsRepository+PostDetailAPI.swift */,
-			);
-			path = GoogleDocsRepository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -957,7 +940,6 @@
 				B169B9392192468500D8FC91 /* PostDetailCommentDetailTableViewCell.swift in Sources */,
 				B169B926219230C600D8FC91 /* PostDetailView.swift in Sources */,
 				B15A0CCA21A5F30200BA0643 /* TheMovieDBAPI.swift in Sources */,
-				B1FA09B7219886E000D9E508 /* OMPGoogleDocsRepository.swift in Sources */,
 				B171213121AC9271002EC25D /* OMPMovieResponse.swift in Sources */,
 				B169B92F2192341B00D8FC91 /* PostDetailDescriptionTableViewCell.swift in Sources */,
 				B169B9122192233600D8FC91 /* PostDetailViewController.swift in Sources */,
@@ -969,7 +951,6 @@
 				B169B92221922D6100D8FC91 /* SectionOfPosts.swift in Sources */,
 				B1EA1E7F218F9E0F00C953A0 /* PostViewModel.swift in Sources */,
 				B194F936218F75410057C0C3 /* PostTableViewCell.swift in Sources */,
-				B1FA09BC21991F9A00D9E508 /* OMPGoogleDocsRepository+PostDetailAPI.swift in Sources */,
 				B1EA1E81218F9F0A00C953A0 /* PostViewModel+Rx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -980,7 +961,6 @@
 			files = (
 				B169B91C219226DB00D8FC91 /* PostDetailModelTest.swift in Sources */,
 				B15A0CD321A5FDC100BA0643 /* OMPTheMovieDBRepositoryTest.swift in Sources */,
-				B1FA09B92198878100D9E508 /* OMPGoogleDocsRepositoryTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,4 +10,8 @@ public class PostModel {
     public func loadPosts(callback: @escaping ([Post]) -> Void) {
         self.api.getPosts(callback: callback)
     }
+    
+    public func loadPosts(byCategory: Int, callback: @escaping ([Post]) -> Void) {
+        self.api.getPosts(byCategory: byCategory, callback: callback)
+    }
 }

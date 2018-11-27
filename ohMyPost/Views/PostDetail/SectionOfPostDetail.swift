@@ -38,7 +38,7 @@ extension PostDetailSection: IdentifiableType {
     var identity: String {
         switch self {
         case .post(let post):
-            return "Post\(post.id)"
+            return "Post\(post.id)\(post.category)"
         case .user(let user):
             return "User\(user.id)"
         case .comments(let comments):

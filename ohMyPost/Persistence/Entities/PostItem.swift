@@ -3,6 +3,7 @@ import CoreData
 import ohMyPostBase
 
 final class PostItem: NSManagedObject, Managed {
+    @NSManaged fileprivate(set) var category: Int16
     @NSManaged fileprivate(set) var postId: Int64
     @NSManaged fileprivate(set) var favorite: Bool
     @NSManaged fileprivate(set) var read: Bool
@@ -24,13 +25,14 @@ final class PostItem: NSManagedObject, Managed {
         self.title = post.title
         self.body = post.body
         self.imageUrl = post.image
-        self.favorite = post.favorited
-        self.read = post.read
+        self.read = self.read ? true : post.read
+        self.favorite = self.favorite ? true : post.favorited
+        self.category = Int16(post.category)
     }
     
     static func insertOrUpdate(into context: NSManagedObjectContext, post: Post, callback: ((PostItem) -> ())? = nil) {
         let request = NSFetchRequest<PostItem>(entityName: "PostItem")
-        request.predicate = NSPredicate(format: "postId == %i", post.id)
+        request.predicate = NSPredicate(format: "postId == %i AND category == %i", post.id, post.category)
         
         let items = try? context.fetch(request)
         if let item = items?.first {
@@ -60,6 +62,7 @@ final class PostItem: NSManagedObject, Managed {
             userId: 0,
             title: self.title,
             body: self.body,
+            category: Int(self.category),
             image: self.imageUrl
         )
     }

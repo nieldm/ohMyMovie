@@ -13,6 +13,13 @@ extension Reactive where Base == PostViewModel {
         return Observable<[Post]>.of(items ?? [])
     }
     
+    func getPostsFromPersistence(withCategory category: MovieCategory) -> Observable<[Post]> {
+        let request = NSFetchRequest<PostItem>(entityName: "PostItem")
+        request.predicate = NSPredicate(format: "category == %i", category.rawValue)
+        let items = try? self.base.context.fetch(request).map { $0.toPost() }
+        return Observable<[Post]>.of(items ?? [])
+    }
+    
     private func resetAll() -> Single<Void> {
         return Single<Void>.create { observer in
             let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "PostItem")
@@ -56,9 +63,9 @@ extension Reactive where Base == PostViewModel {
         return self.loadPosts().flatMap { _ in self.getPostsFromPersistence() }
     }
     
-    func getFiltered() -> Observable<[Post]> {
+    func getFiltered(withCategory category: MovieCategory) -> Observable<[Post]> {
         return Observable.create { observer in
-            self.base.getFavoritePosts { posts in
+            self.base.getFavoritePosts(withCategory: category) { posts in
                 observer.onNext(posts)
                 observer.onCompleted()
             }
@@ -66,9 +73,9 @@ extension Reactive where Base == PostViewModel {
         }
     }
     
-    func getUnread() -> Observable<[Post]> {
+    func getUnread(withCategory category: MovieCategory) -> Observable<[Post]> {
         return Observable.create { observer in
-            self.base.getReadedPosts { posts in
+            self.base.getReadedPosts(withCategory: category) { posts in
                 observer.onNext(posts)
                 observer.onCompleted()
             }
@@ -76,12 +83,27 @@ extension Reactive where Base == PostViewModel {
         }
     }
     
-    func getBySegment(segment: PostSegmentValue) -> Observable<[Post]> {
+    func getPost(byCategory category: MovieCategory) -> Observable<[Post]> {
+        return Observable.create { observer in
+            self.base.model.loadPosts(byCategory: category.rawValue) { posts in
+                posts.forEach { let _ = PostItem.insertOrUpdate(into: self.base.context, post: $0) }
+                observer.onNext(posts)
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func getBySegment(segment: PostSegmentValue, withCategory category: MovieCategory) -> Observable<[Post]> {
         switch segment {
-        case .all: return self.getPostsFromPersistence()
-        case .favorite: return self.getFiltered()
-        case .unread: return self.getUnread()
+        case .all: return self.getPostsFromPersistence(withCategory: category)
+        case .favorite: return self.getFiltered(withCategory: category)
+        case .unread: return self.getUnread(withCategory: category)
         }
+    }
+    
+    func getByCategory(category: MovieCategory) -> Observable<[Post]> {
+        return self.getPost(byCategory: category)
     }
     
 }

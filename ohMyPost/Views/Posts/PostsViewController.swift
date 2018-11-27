@@ -2,6 +2,7 @@ import UIKit
 import Then
 import SnapKit
 import RxDataSources
+import RxSwiftExt
 import ohMyPostBase
 import RxSwift
 import RxCocoa
@@ -11,13 +12,25 @@ enum PostSegmentValue: Int {
     case all = 0, favorite, unread
 }
 
+enum MovieCategory: Int {
+    case popular = 0, topRated, upcoming
+}
+
 class PostsViewController: UIViewController {
 
     private let viewModel: PostViewModel
     private let disposeBag = DisposeBag()
     fileprivate let data = BehaviorRelay<[Post]>(value: [])
     private lazy var segmentController = UISegmentedControl(frame: .zero)
+    private lazy var categorySegmentController = UISegmentedControl(frame: .zero)
     private lazy var noResults = UILabel(frame: .zero)
+    
+    private var actualSegment: PostSegmentValue? {
+        return PostSegmentValue(rawValue: self.segmentController.selectedSegmentIndex)
+    }
+    private var actualCategory: MovieCategory {
+        return MovieCategory(rawValue: self.categorySegmentController.selectedSegmentIndex) ?? MovieCategory.popular
+    }
     
     fileprivate var tableView: UITableView! {
         didSet {
@@ -60,10 +73,31 @@ class PostsViewController: UIViewController {
                 .disposed(by: self.disposeBag)
         }
         
-        self.segmentController.do {
+        self.categorySegmentController.do {
             self.view.addSubview($0)
             $0.snp.makeConstraints { make in
                 make.top.equalTo(self.view.snp.topMargin).offset(16)
+                make.left.right.equalToSuperview().inset(8)
+            }
+            $0.insertSegment(withTitle: "Popular", at: MovieCategory.popular.rawValue, animated: false)
+            $0.insertSegment(withTitle: "Top Rated", at: MovieCategory.topRated.rawValue, animated: false)
+            $0.insertSegment(withTitle: "Upcoming", at: MovieCategory.upcoming.rawValue, animated: false)
+            $0.selectedSegmentIndex = 0
+            $0.tintColor = .turquoiseBlue
+            $0.rx.controlEvent(UIControlEvents.valueChanged)
+                .map { _ in MovieCategory.init(rawValue: self.categorySegmentController.selectedSegmentIndex)! }
+                .flatMap { self.viewModel.rx.getByCategory(category: $0) }
+                .do(onNext: { [weak self] _ in
+                    self?.segmentController.selectedSegmentIndex = PostSegmentValue.all.rawValue
+                })
+                .bind(to: self.data)
+                .disposed(by: self.disposeBag)
+        }
+        
+        self.segmentController.do {
+            self.view.addSubview($0)
+            $0.snp.makeConstraints { make in
+                make.top.equalTo(self.categorySegmentController.snp.bottom).offset(16)
                 make.left.right.equalToSuperview().inset(8)
             }
             $0.insertSegment(withTitle: "All", at: PostSegmentValue.all.rawValue, animated: false)
@@ -72,8 +106,9 @@ class PostsViewController: UIViewController {
             $0.selectedSegmentIndex = 0
             $0.tintColor = .turquoiseBlue
             $0.rx.controlEvent(UIControlEvents.valueChanged)
-                .map { _ in PostSegmentValue.init(rawValue: self.segmentController.selectedSegmentIndex)! }
-                .flatMap { self.viewModel.rx.getBySegment(segment: $0) }
+                .map { _ in PostSegmentValue.init(rawValue: self.segmentController.selectedSegmentIndex) }
+                .unwrap()
+                .flatMap { self.viewModel.rx.getBySegment(segment: $0, withCategory: self.actualCategory) }
                 .bind(to: self.data)
                 .disposed(by: self.disposeBag)
         }
@@ -166,7 +201,7 @@ class PostsViewController: UIViewController {
         guard let segment = PostSegmentValue(rawValue: self.segmentController.selectedSegmentIndex) else {
             return
         }
-        self.viewModel.rx.getBySegment(segment: segment)
+        self.viewModel.rx.getBySegment(segment: segment, withCategory: self.actualCategory)
             .subscribe(onNext: { [weak self] posts in
                 self?.data.accept(posts)
             })
