@@ -31,17 +31,17 @@ class PostViewModel {
         )
     }
     
-    func getFavoritePosts(callback: @escaping ([Post]) -> ()) {
+    func getFavoritePosts(withCategory category: MovieCategory, callback: @escaping ([Post]) -> ()) {
         let request = NSFetchRequest<PostItem>(entityName: "PostItem")
-        request.predicate = NSPredicate(format: "favorite == YES")
+        request.predicate = NSPredicate(format: "favorite == YES AND category == %i", category.rawValue)
         
         let items = try? context.fetch(request).map { $0.toPost() }
         callback(items ?? [])
     }
     
-    func getReadedPosts(callback: @escaping ([Post]) -> ()) {
+    func getReadedPosts(withCategory category: MovieCategory, callback: @escaping ([Post]) -> ()) {
         let request = NSFetchRequest<PostItem>(entityName: "PostItem")
-        request.predicate = NSPredicate(format: "read == NO")
+        request.predicate = NSPredicate(format: "read == NO AND category == %i", category.rawValue)
         
         let items = try? context.fetch(request).map { $0.toPost() }
         callback(items ?? [])

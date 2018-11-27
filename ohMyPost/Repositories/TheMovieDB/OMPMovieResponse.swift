@@ -2,7 +2,7 @@ import Foundation
 
 struct OMPMovieResponse: Codable {
     
-    var id: Int
+    var id: Int?
     var results: [OMPMovie]
     var totalResult: Int
     

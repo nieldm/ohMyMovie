@@ -63,20 +63,11 @@ class PostDetailViewModel {
         request.predicate = NSPredicate(format: "postId == %i", model.post.id)
         
         let items = try? context.fetch(request)
-        if let item = items?.first {
+        items?.forEach { item in
             self.context.performChanges {
                 item.toogleFavorite()
                 callback(item.favorite)
             }
-            return
-        }
-        self.context.performChanges {
-            let _ = PostItem.insert(
-                into: self.context,
-                post: self.model.post.with {
-                    $0.favorited = true
-                }
-            )
         }
         callback(true)
     }
