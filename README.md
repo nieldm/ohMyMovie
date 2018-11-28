@@ -1,5 +1,7 @@
 # ohMyPost
 
+This app is based in an Skeleton built by myself, that handles many things
+
 ## Installation
 
 ```
