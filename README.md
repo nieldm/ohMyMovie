@@ -10,6 +10,19 @@ pod install && xed .
 
 MVVM with Repositories and combined with RxSwift
 
+## Layers
+
+The App is splited in 
+
+  - Network Layer: This one is tied to the Business Logic so its on the main target of the application, it's handle by the library Moya and a Repository that implements the Core API logic
+  - Persistence Layer: This is a simple one and also is tied to the Business Logic, i use core data in this case so it will save al the elements and handle the watched and favorite state
+  - Core: is in a separated target, not tied to UIKit so it can be used in Mac app or Notification extensions among others
+  - View Layer: is all done in a programmatically way, so it won't have imposible conflicts like the xib or storyboards
+
+## Responsabilities
+
+This app is built based on the classes with have only one resposability, but there is one that handle 2 resposabilities, in this case is the ViewController, it handles the view but also the navigation, this was do it that way becase the app is not too complex, but to fix that we can add a Coordinator.
+
 ## Libraries
 
   - pod 'Moya/RxSwift',      '~> 10.0'
@@ -23,8 +36,6 @@ MVVM with Repositories and combined with RxSwift
     Library to create constraints in a more readable way, all the views in this example are created by code.
   - pod 'RxDataSources',     '~> 3.0'
     This one is a library with a diff algorithm to handle updates in TableViews and CollectionViews
-  - pod 'CSV.swift',         '~> 2.2.1'
-    Read CSV files
   - pod 'AlamofireImage',    '~> 3.4'
     Library to handle the download and cache of the images
 
